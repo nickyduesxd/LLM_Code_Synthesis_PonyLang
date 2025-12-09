@@ -263,18 +263,6 @@ This framework is designed for research on:
 - Transfer learning from mainstream to niche languages
 - Actor-based concurrency pattern synthesis
 
-## Citation
-
-If you use this framework in your research, please cite:
-
-```bibtex
-@misc{ponyllmeval2024,
-  title={Evaluating LLM Code Synthesis on Pony Language},
-  author={Your Name},
-  year={2024},
-  institution={Johns Hopkins University}
-}
-```
 
 ## License
 
@@ -288,7 +276,7 @@ MIT License
 
 ## Contact
 
-For questions or issues, please open an issue on GitHub or contact [your email].
+For questions or issues, please open an issue on GitHub or contact nzayfma1@jh.edu.
 
 ---
 
