@@ -28,7 +28,7 @@ help:
 install:
 	@echo "Installing Python dependencies..."
 	pip install -r requirements.txt
-	@echo "✓ Installation complete"
+	@echo "Installation complete"
 
 # Run setup validation
 setup:
@@ -78,13 +78,13 @@ clean:
 	rm -rf .pytest_cache
 	find . -name "*.pyc" -delete
 	find . -name ".DS_Store" -delete
-	@echo "✓ Cleaned"
+	@echo "Cleaned"
 
 # Clean everything including results
 clean-all: clean
 	@echo "Cleaning all results..."
 	rm -rf results/*
-	@echo "✓ Everything cleaned"
+	@echo "Everything cleaned"
 
 # Check environment
 check:
@@ -98,9 +98,9 @@ check:
 	@if [ -n "$$GEMINI_API_KEY" ]; then echo "SET"; else echo "NOT SET"; fi
 	@echo ""
 	@echo "Python Packages:"
-	@python3 -c "import google.generativeai" 2>/dev/null && echo "  ✓ google-generativeai" || echo "  ✗ google-generativeai"
-	@python3 -c "import pandas" 2>/dev/null && echo "  ✓ pandas" || echo "  ✗ pandas"
-	@python3 -c "import matplotlib" 2>/dev/null && echo "  ✓ matplotlib" || echo "  ✗ matplotlib"
+	@python3 -c "import google.generativeai" 2>/dev/null && echo "  google-generativeai" || echo "  google-generativeai"
+	@python3 -c "import pandas" 2>/dev/null && echo "  pandas" || echo "  pandas"
+	@python3 -c "import matplotlib" 2>/dev/null && echo "  matplotlib" || echo "  matplotlib"
 
 # Show dataset statistics
 dataset-info:

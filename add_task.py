@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-Task Generator Helper
-Interactively create new tasks for the Pony LLM evaluation dataset
-"""
-
 import json
 import sys
 from pathlib import Path
@@ -28,10 +22,6 @@ def get_multiline_input(prompt):
     return "\n".join(lines[:-1])  # Remove last empty line
 
 def create_task():
-    """Interactively create a new task"""
-    print("\n" + "="*60)
-    print("CREATE NEW PONY TASK")
-    print("="*60 + "\n")
     
     # Get task ID
     task_id = get_input("Task ID (e.g., basic_004)")
@@ -39,12 +29,6 @@ def create_task():
         print("Task ID is required!")
         task_id = get_input("Task ID (e.g., basic_004)")
     
-    # Get category
-    print("\nCategories:")
-    print("1. basic_syntax")
-    print("2. reference_capabilities")
-    print("3. actor_concurrency")
-    print("4. complex_systems")
     category_choice = get_input("Choose category (1-4)")
     categories = {
         '1': 'basic_syntax',
@@ -54,12 +38,6 @@ def create_task():
     }
     category = categories.get(category_choice, 'basic_syntax')
     
-    # Get difficulty
-    print("\nDifficulties:")
-    print("1. easy")
-    print("2. medium")
-    print("3. hard")
-    print("4. expert")
     diff_choice = get_input("Choose difficulty (1-4)")
     difficulties = {
         '1': 'easy',
@@ -176,15 +154,15 @@ def main():
         confirm = get_input("Add this task to dataset? (y/n)", "y")
         if confirm.lower() == 'y':
             if add_task_to_dataset(task, dataset_path):
-                print("\n✅ Success!")
+                print("\nSuccess")
             else:
-                print("\n❌ Failed to add task")
+                print("\nFailed to add task")
         
         another = get_input("\nCreate another task? (y/n)", "n")
         if another.lower() != 'y':
             break
     
-    print("\n👋 Done!")
+    print("\nDone")
 
 if __name__ == "__main__":
     main()

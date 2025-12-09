@@ -266,40 +266,40 @@ CONTRASTIVE_TEMPLATE = """
 
 Common Pony Mistakes to AVOID:
 
-❌ WRONG - Standalone functions:
+WRONG - Standalone functions:
 ```pony
 fun factorial(n: U64): U64 =>  // Error: functions must be in class/primitive/actor
   n * factorial(n - 1)
 ```
 
-✓ CORRECT - Functions in primitives:
+CORRECT - Functions in primitives:
 ```pony
 primitive Factorial
   fun apply(n: U64): U64 =>
     if n <= 1 then 1 else n * apply(n - 1) end
 ```
 
-❌ WRONG - Missing constructor:
+WRONG - Missing constructor:
 ```pony
 class Counter
   var _count: U64  // Error: must initialize in constructor
 ```
 
-✓ CORRECT - Proper initialization:
+CORRECT - Proper initialization:
 ```pony
 class Counter
   var _count: U64
   new create() => _count = 0
 ```
 
-❌ WRONG - Capability violations:
+WRONG - Capability violations:
 ```pony
 actor Main
   new create(env: Env) =>
     let arr = [1, 2, 3]  // Error: array literal type unclear
 ```
 
-✓ CORRECT - Explicit types:
+CORRECT - Explicit types:
 ```pony
 actor Main
   new create(env: Env) =>
@@ -402,13 +402,3 @@ def get_prompt(strategy: str, task_description: str, category: str = "") -> str:
     template = templates.get(strategy, ZERO_SHOT_TEMPLATE)
     
     return template.replace('{language_context}', PONY_LANGUAGE_CONTEXT).replace('{task_description}', task_description)
-# Example usage
-if __name__ == "__main__":
-    sample_task = "Create a Counter actor that increments a value and returns it to a callback."
-    
-    print("=== ZERO-SHOT ===")
-    print(get_prompt('zero_shot', sample_task))
-    print("\n=== FEW-SHOT ===")
-    print(get_prompt('few_shot', sample_task))
-    print("\n=== CHAIN-OF-THOUGHT ===")
-    print(get_prompt('chain_of_thought', sample_task))

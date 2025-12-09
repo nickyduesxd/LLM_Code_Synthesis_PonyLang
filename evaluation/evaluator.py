@@ -1,16 +1,3 @@
-#!/usr/bin/env python3
-"""
-Main Evaluation Harness for Pony LLM Code Synthesis
-
-This script:
-1. Loads tasks from the dataset
-2. Generates prompts using different strategies
-3. Queries LLMs (Google Gemini, OpenAI, Anthropic)
-4. Compiles generated code with ponyc
-5. Runs tests and collects metrics
-6. Generates evaluation reports
-"""
-
 import json
 import os
 import subprocess
