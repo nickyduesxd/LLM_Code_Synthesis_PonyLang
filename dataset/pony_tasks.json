@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "language": "Pony",
+    "total_tasks": 15,
+    "categories": ["basic_syntax", "reference_capabilities", "actor_concurrency", "complex_systems"]
+  },
+  "tasks": [
+    {
+      "id": "basic_001",
+      "category": "basic_syntax",
+      "difficulty": "easy",
+      "title": "Factorial Function",
+      "description": "Write a function that computes the factorial of a non-negative integer recursively.",
+      "prompt": "Implement a recursive factorial function in Pony that takes a U64 parameter and returns U64.",
+      "reference_solution": "primitive Factorial\n  fun apply(n: U64): U64 =>\n    if n <= 1 then\n      1\n    else\n      n * apply(n - 1)\n    end",
+      "test_cases": [
+        {"input": "0", "expected": "1"},
+        {"input": "1", "expected": "1"},
+        {"input": "5", "expected": "120"},
+        {"input": "10", "expected": "3628800"}
+      ],
+      "tags": ["recursion", "arithmetic"]
+    },
+    {
+      "id": "basic_002",
+      "category": "basic_syntax",
+      "difficulty": "easy",
+      "title": "Array Sum",
+      "description": "Write a function that sums all elements in an array of integers.",
+      "prompt": "Create a Pony function that takes an Array[U64] val and returns the sum of all elements as U64.",
+      "reference_solution": "primitive ArraySum\n  fun apply(arr: Array[U64] val): U64 =>\n    var sum: U64 = 0\n    for value in arr.values() do\n      sum = sum + value\n    end\n    sum",
+      "test_cases": [
+        {"input": "[1, 2, 3, 4, 5]", "expected": "15"},
+        {"input": "[]", "expected": "0"},
+        {"input": "[100]", "expected": "100"}
+      ],
+      "tags": ["arrays", "iteration"]
+    },
+    {
+      "id": "basic_003",
+      "category": "basic_syntax",
+      "difficulty": "medium",
+      "title": "Fibonacci Sequence",
+      "description": "Implement a function to compute the nth Fibonacci number.",
+      "prompt": "Write a Pony function that computes the nth Fibonacci number (0-indexed) using iteration.",
+      "reference_solution": "primitive Fibonacci\n  fun apply(n: U64): U64 =>\n    if n <= 1 then\n      n\n    else\n      var a: U64 = 0\n      var b: U64 = 1\n      var i: U64 = 2\n      while i <= n do\n        let temp = a + b\n        a = b\n        b = temp\n        i = i + 1\n      end\n      b\n    end",
+      "test_cases": [
+        {"input": "0", "expected": "0"},
+        {"input": "1", "expected": "1"},
+        {"input": "10", "expected": "55"},
+        {"input": "15", "expected": "610"}
+      ],
+      "tags": ["iteration", "arithmetic", "algorithms"]
+    },
+    {
+      "id": "cap_001",
+      "category": "reference_capabilities",
+      "difficulty": "medium",
+      "title": "Immutable String Builder",
+      "description": "Create a class that builds strings immutably using val capability.",
+      "prompt": "Implement a StringBuffer class in Pony that stores strings with val capability and provides a method to append strings, returning a new StringBuffer.",
+      "reference_solution": "class val StringBuffer\n  let _data: String val\n  \n  new val create(s: String val = \"\") =>\n    _data = s\n  \n  fun val append(s: String val): StringBuffer val =>\n    StringBuffer(_data + s)\n  \n  fun val string(): String val =>\n    _data",
+      "test_cases": [
+        {"input": "create(\"\").append(\"Hello\")", "expected": "\"Hello\""},
+        {"input": "create(\"A\").append(\"B\").append(\"C\")", "expected": "\"ABC\""}
+      ],
+      "tags": ["capabilities", "val", "immutability"]
+    },
+    {
+      "id": "cap_002",
+      "category": "reference_capabilities",
+      "difficulty": "hard",
+      "title": "Isolated Counter",
+      "description": "Create a counter class with iso capability that can be safely sent between actors.",
+      "prompt": "Implement a Counter class with iso capability that maintains an internal count and provides increment and get methods.",
+      "reference_solution": "class iso Counter\n  var _count: U64\n  \n  new iso create() =>\n    _count = 0\n  \n  fun ref increment() =>\n    _count = _count + 1\n  \n  fun box get(): U64 =>\n    _count",
+      "test_cases": [
+        {"input": "create().increment().get()", "expected": "1"},
+        {"input": "create().increment().increment().get()", "expected": "2"}
+      ],
+      "tags": ["capabilities", "iso", "mutable_state"]
+    },
+    {
+      "id": "cap_003",
+      "category": "reference_capabilities",
+      "difficulty": "hard",
+      "title": "Safe Array Wrapper",
+      "description": "Create a wrapper around Array that enforces read-only access using box capability.",
+      "prompt": "Implement a ReadOnlyArray class that wraps an Array[U64] and only allows reading values, not modification.",
+      "reference_solution": "class box ReadOnlyArray\n  let _data: Array[U64] val\n  \n  new box create(data: Array[U64] val) =>\n    _data = data\n  \n  fun box apply(i: USize): U64 ? =>\n    _data(i)?\n  \n  fun box size(): USize =>\n    _data.size()",
+      "test_cases": [
+        {"input": "create([1,2,3]).apply(0)", "expected": "1"},
+        {"input": "create([5,10,15]).size()", "expected": "3"}
+      ],
+      "tags": ["capabilities", "box", "safety"]
+    },
+    {
+      "id": "actor_001",
+      "category": "actor_concurrency",
+      "difficulty": "medium",
+      "title": "Simple Counter Actor",
+      "description": "Create an actor that maintains a counter and responds to increment messages.",
+      "prompt": "Implement a CounterActor in Pony that can receive increment and get_value messages.",
+      "reference_solution": "actor CounterActor\n  var _count: U64 = 0\n  \n  be increment() =>\n    _count = _count + 1\n  \n  be get_value(callback: {(U64)} val) =>\n    callback(_count)",
+      "test_cases": [
+        {"description": "Actor increments correctly"},
+        {"description": "Actor responds with current value"}
+      ],
+      "tags": ["actors", "behaviors", "message_passing"]
+    },
+    {
+      "id": "actor_002",
+      "category": "actor_concurrency",
+      "difficulty": "hard",
+      "title": "Echo Actor",
+      "description": "Create an actor that echoes back received messages to a callback.",
+      "prompt": "Implement an EchoActor that receives String messages and sends them back to a provided callback actor.",
+      "reference_solution": "actor EchoActor\n  be echo(msg: String val, callback: {(String val)} val) =>\n    callback(msg)",
+      "test_cases": [
+        {"description": "Echoes message correctly"},
+        {"description": "Handles multiple messages"}
+      ],
+      "tags": ["actors", "callbacks", "message_passing"]
+    },
+    {
+      "id": "actor_003",
+      "category": "actor_concurrency",
+      "difficulty": "hard",
+      "title": "Worker Pool",
+      "description": "Create a pool of worker actors that process tasks concurrently.",
+      "prompt": "Implement a WorkerPool actor that manages multiple worker actors and distributes tasks among them.",
+      "reference_solution": "actor Worker\n  be process(task: U64, callback: {(U64)} val) =>\n    // Simulate work\n    callback(task * 2)\n\nactor WorkerPool\n  let _workers: Array[Worker] val\n  var _next_worker: USize = 0\n  \n  new create(num_workers: USize) =>\n    let workers = recover iso Array[Worker] end\n    for i in Range(0, num_workers) do\n      workers.push(Worker)\n    end\n    _workers = consume workers\n  \n  be submit_task(task: U64, callback: {(U64)} val) =>\n    try\n      _workers(_next_worker)?.process(task, callback)\n      _next_worker = (_next_worker + 1) % _workers.size()\n    end",
+      "test_cases": [
+        {"description": "Distributes tasks across workers"},
+        {"description": "Round-robin distribution"}
+      ],
+      "tags": ["actors", "concurrency", "worker_pool"]
+    },
+    {
+      "id": "complex_001",
+      "category": "complex_systems",
+      "difficulty": "hard",
+      "title": "Producer-Consumer",
+      "description": "Implement a producer-consumer pattern with actors and safe message passing.",
+      "prompt": "Create Producer and Consumer actors that safely exchange data through a Buffer actor.",
+      "reference_solution": "actor Buffer\n  let _data: Array[U64] = Array[U64]\n  \n  be add(item: U64) =>\n    _data.push(item)\n  \n  be get(consumer: Consumer tag) =>\n    try\n      let item = _data.shift()?\n      consumer.receive(item)\n    end\n\nactor Producer\n  be produce(buffer: Buffer tag, item: U64) =>\n    buffer.add(item)\n\nactor Consumer\n  be receive(item: U64) =>\n    // Process item\n    None",
+      "test_cases": [
+        {"description": "Producer sends to buffer"},
+        {"description": "Consumer receives from buffer"}
+      ],
+      "tags": ["actors", "patterns", "communication"]
+    },
+    {
+      "id": "complex_002",
+      "category": "complex_systems",
+      "difficulty": "expert",
+      "title": "Bank Account System",
+      "description": "Implement a multi-actor banking system with thread-safe operations.",
+      "prompt": "Create Account actors that can safely transfer money between each other using Pony's capability system.",
+      "reference_solution": "actor Account\n  var _balance: U64\n  let _id: String val\n  \n  new create(id: String val, initial_balance: U64) =>\n    _id = id\n    _balance = initial_balance\n  \n  be deposit(amount: U64) =>\n    _balance = _balance + amount\n  \n  be withdraw(amount: U64, callback: {(Bool)} val) =>\n    if _balance >= amount then\n      _balance = _balance - amount\n      callback(true)\n    else\n      callback(false)\n    end\n  \n  be get_balance(callback: {(U64)} val) =>\n    callback(_balance)\n  \n  be transfer(amount: U64, to: Account tag, callback: {(Bool)} val) =>\n    if _balance >= amount then\n      _balance = _balance - amount\n      to.deposit(amount)\n      callback(true)\n    else\n      callback(false)\n    end",
+      "test_cases": [
+        {"description": "Deposit increases balance"},
+        {"description": "Withdraw decreases balance if sufficient funds"},
+        {"description": "Transfer moves money safely between accounts"}
+      ],
+      "tags": ["actors", "state_management", "transactions"]
+    },
+    {
+      "id": "complex_003",
+      "category": "complex_systems",
+      "difficulty": "expert",
+      "title": "Distributed Counter",
+      "description": "Implement a distributed counter using multiple actors with aggregation.",
+      "prompt": "Create a system where multiple CounterNode actors maintain local counts and a Coordinator actor aggregates them.",
+      "reference_solution": "actor CounterNode\n  var _count: U64 = 0\n  \n  be increment() =>\n    _count = _count + 1\n  \n  be get_count(coordinator: Coordinator tag) =>\n    coordinator.receive_count(_count)\n\nactor Coordinator\n  var _total: U64 = 0\n  var _responses: USize = 0\n  let _expected: USize\n  \n  new create(expected_nodes: USize) =>\n    _expected = expected_nodes\n  \n  be receive_count(count: U64) =>\n    _total = _total + count\n    _responses = _responses + 1\n  \n  be get_total(callback: {(U64)} val) =>\n    if _responses == _expected then\n      callback(_total)\n    end",
+      "test_cases": [
+        {"description": "Aggregates counts from multiple nodes"},
+        {"description": "Waits for all responses"}
+      ],
+      "tags": ["actors", "distributed", "aggregation"]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Results and generated files
+results/*/
+evaluation/generated_code/
+evaluation/compilation_work/
+*.log
+
+# Pony build artifacts
+*.o
+*.d
+main
+main.exe
+
+# Compilation work directories
+**/compilation_work/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# API keys and secrets
+secrets.yaml
+api_keys.txt
+
+# OS specific
+Thumbs.db
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Documentation build
+docs/_build/
+
+# Keep structure but ignore content in some directories
+results/.gitkeep
+!results/.gitkeep
+evaluation/generated_code/.gitkeep
+!evaluation/generated_code/.gitkeep
+evaluation/compilation_work/.gitkeep
+!evaluation/compilation_work/.gitkeep
