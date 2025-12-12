@@ -12,11 +12,10 @@ This project systematically evaluates how well LLMs (particularly Google Gemini)
 
 ## Features
 
-- **15+ Curated Pony Tasks** across 4 categories
-- **8 Prompting Strategies**: zero-shot, few-shot, chain-of-thought, self-debug, transfer learning, etc.
+- **12 Curated Pony Tasks** across 4 categories
+- **10 Prompting Strategies**: zero-shot, few-shot, chain-of-thought, self-debug, transfer learning, etc.
 - **Automated Compilation Testing** with ponyc compiler
-- **Comprehensive Analysis** with visualizations and metrics
-- **Multiple LLM Support**: Gemini, OpenAI, Anthropic
+- **Analysis** with visualizations and metrics
 
 ## Project Structure
 
@@ -33,7 +32,6 @@ ponylang-llm-eval/
 │   └── reference_implementations.pony  # Example Pony code
 ├── results/                     # Generated results (created at runtime)
 ├── tests/                       # Test cases
-├── config.yaml                  # Configuration file
 ├── requirements.txt             # Python dependencies
 └── README.md                    # This file
 ```
@@ -126,19 +124,16 @@ This generates:
 - Immutable buffers (val)
 - Isolated counters (iso)
 - Read-only wrappers (box)
-- Tests understanding of capability system
 
-### 3. Actor Concurrency (3 tasks)
+### 3. Actor Concurrency (3 tasks) 
 - Counter actors
 - Echo actors with callbacks
 - Worker pools
-- Tests actor-based programming
 
 ### 4. Complex Systems (3 tasks)
 - Producer-consumer patterns
 - Banking system with transfers
 - Distributed counters
-- Tests real-world concurrent systems
 
 ## Prompting Strategies
 
@@ -169,9 +164,6 @@ Converts from C++ to Pony
 ## Evaluation Metrics
 
 - **Compilation Success Rate**: % of generated code that compiles
-- **Syntax Correctness**: Proper Pony syntax usage
-- **Capability Correctness**: Appropriate reference capability usage
-- **Test Pass Rate**: Functional correctness (when tests available)
 - **Execution Time**: Time per task/strategy
 
 ## Example Usage
@@ -240,21 +232,6 @@ import time
 time.sleep(1)  # 1 second delay
 ```
 
-### Compilation Timeouts
-Increase timeout in `config.yaml`:
-```yaml
-evaluation:
-  compilation_timeout: 60  # seconds
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add new tasks to `dataset/pony_tasks.json`
-4. Add new prompting strategies to `prompts/prompting_strategies.py`
-5. Submit a pull request
-
 ## Research Applications
 
 This framework is designed for research on:
@@ -279,5 +256,3 @@ MIT License
 For questions or issues, please open an issue on GitHub or contact nzayfma1@jh.edu.
 
 ---
-
-**Note**: This is a research project for evaluating LLM capabilities. Generated code should be reviewed before production use.
