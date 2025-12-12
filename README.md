@@ -58,6 +58,9 @@ make
 sudo make install
 ```
 
+**From CloudSmith:**
+https://cloudsmith.io/~ponylang/repos/releases/packages/
+
 Verify installation:
 ```bash
 ponyc --version
