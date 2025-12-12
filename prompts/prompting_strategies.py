@@ -1,14 +1,3 @@
-"""
-Prompting Strategy Templates for Pony LLM Evaluation
-
-This module contains different prompting strategies to test LLM code synthesis:
-1. Zero-shot
-2. Few-shot
-3. Chain-of-thought
-4. Self-debug
-5. Transfer (from C++/Rust)
-"""
-
 PONY_LANGUAGE_CONTEXT = """
 Pony is an actor-model programming language with:
 - Reference capabilities: iso (isolated), trn (transition), ref (reference), val (value), box (read-only), tag (opaque)

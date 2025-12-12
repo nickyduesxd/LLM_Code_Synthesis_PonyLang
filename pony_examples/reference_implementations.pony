@@ -1,7 +1,5 @@
 """
-Example 1: Basic Factorial Function
-Category: Basic Syntax
-Demonstrates: Recursion, primitive functions
+Basic Factorial Function
 """
 primitive Factorial
   fun apply(n: U64): U64 =>
@@ -17,9 +15,7 @@ actor Main
     // Output: 120
 
 """
-Example 2: Immutable String Builder
-Category: Reference Capabilities
-Demonstrates: val capability, immutability
+Immutable String Builder
 """
 class val StringBuffer
   let _data: String val
@@ -41,9 +37,7 @@ actor Main
     // Output: Hello World
 
 """
-Example 3: Counter Actor
-Category: Actor Concurrency
-Demonstrates: Actor, behaviors, message passing, callbacks
+Counter Actor
 """
 actor Counter
   var _count: U64 = 0
@@ -73,9 +67,7 @@ actor Main
     )
 
 """
-Example 4: Isolated Counter (Sendable)
-Category: Reference Capabilities
-Demonstrates: iso capability, safe sharing between actors
+Isolated Counter (Sendable)
 """
 class iso Counter
   var _count: U64
@@ -100,9 +92,7 @@ actor Main
     env.out.print("Initial: " + counter.get().string())
 
 """
-Example 5: Producer-Consumer Pattern
-Category: Complex Systems
-Demonstrates: Multiple actors, message passing, buffer
+Producer-Consumer Pattern
 """
 actor Buffer
   let _data: Array[U64] = Array[U64]
@@ -146,9 +136,7 @@ actor Main
     buffer.get(consumer)
 
 """
-Example 6: Bank Account with Safe Transfers
-Category: Complex Systems
-Demonstrates: Actor state management, callbacks, transactions
+Bank Account with Safe Transfers
 """
 actor Account
   var _balance: U64
@@ -205,9 +193,7 @@ actor Main
     )
 
 """
-Example 7: Worker Pool Pattern
-Category: Complex Systems
-Demonstrates: Multiple actors, task distribution, round-robin
+Worker Pool Pattern
 """
 actor Worker
   let _id: USize
@@ -250,9 +236,7 @@ actor Main
     end
 
 """
-Example 8: Reference Capability Conversions
-Category: Reference Capabilities
-Demonstrates: recover blocks, capability transitions
+Reference Capability Conversions
 """
 class ref MutableBox
   var _value: U64
