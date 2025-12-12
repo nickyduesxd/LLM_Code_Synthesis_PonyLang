@@ -176,15 +176,15 @@ def main():
         confirm = get_input("Add this task to dataset? (y/n)", "y")
         if confirm.lower() == 'y':
             if add_task_to_dataset(task, dataset_path):
-                print("\n✅ Success!")
+                print("\nSuccess")
             else:
-                print("\n❌ Failed to add task")
+                print("\nFailed to add task")
         
         another = get_input("\nCreate another task? (y/n)", "n")
         if another.lower() != 'y':
             break
     
-    print("\n👋 Done!")
+    print("\nDone")
 
 if __name__ == "__main__":
     main()
