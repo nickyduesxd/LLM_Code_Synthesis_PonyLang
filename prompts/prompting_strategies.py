@@ -272,7 +272,7 @@ fun factorial(n: U64): U64 =>  // Error: functions must be in class/primitive/ac
   n * factorial(n - 1)
 ```
 
-✓ CORRECT - Functions in primitives:
+CORRECT - Functions in primitives:
 ```pony
 primitive Factorial
   fun apply(n: U64): U64 =>
@@ -285,7 +285,7 @@ class Counter
   var _count: U64  // Error: must initialize in constructor
 ```
 
-✓ CORRECT - Proper initialization:
+CORRECT - Proper initialization:
 ```pony
 class Counter
   var _count: U64
